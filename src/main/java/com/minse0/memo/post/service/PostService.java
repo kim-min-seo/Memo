@@ -1,9 +1,12 @@
 package com.minse0.memo.post.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.minse0.memo.common.Filemanager;
 import com.minse0.memo.post.domain.Post;
 import com.minse0.memo.post.repository.PostRepository;
 
@@ -20,14 +23,18 @@ public class PostService {
 	}
 	
 	public boolean addPost(
-			long userID
+			long userId
 			, String title
-			, String contents) {
+			, String contents
+			, MultipartFile file) {
+		
+		String imagePath = Filemanager.saveFile(userId, file);
 		
 		Post post = Post.builder()
-		.userId(userID)
+		.userId(userId)
 		.title(title)
 		.contents(contents)
+		.imagePath(imagePath)
 		.build();
 		
 		try {
@@ -40,8 +47,18 @@ public class PostService {
 		
 	}
 	
-	public List<Post> getPostList() {
-	    return postRepository.findAllByOrderByIdDesc();
+	public List<Post> getPostList(long userId) {
+	    return postRepository.findByUserId(userId);
+	}
+	
+	public Post getPost(long id) {
+		Optional<Post> optionalPost =  postRepository.findById(id);
+		
+		if(optionalPost.isPresent()) {
+			return optionalPost.get();
+		} else {
+			return null;
+		}
 	}
 
 }

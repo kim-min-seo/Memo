@@ -7,5 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.minse0.memo.post.domain.Post;
 
 public interface PostRepository extends JpaRepository<Post, Long>  {
-	List<Post> findAllByOrderByIdDesc();
+	
+	
+	// WHERE `userId` = #{}
+	public List<Post> findByUserId(long userId);
 }

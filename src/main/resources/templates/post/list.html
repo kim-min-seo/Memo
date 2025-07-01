@@ -14,13 +14,14 @@
         <th>작성 날짜</th>
       </tr>
     </thead>
-    <tbody>
-      <tr th:each="post : ${postList}">
-        <td th:text="${post.id}">1</td>
-        <td th:text="${post.title}">제목</td>
-        <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}">날짜</td>
-      </tr>
-    </tbody>
+	    <tbody>
+	  <tr th:each="post, stat : ${postList}">
+	    <td th:text="${stat.count}">1</td>
+	    <td><a th:href="|/post/detail-view?id=${stat.count}|" th:text="${post.title}" >메모.</a></td>
+	    <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm:ss')}">날짜</td>
+	  </tr>
+	</tbody>
+    
   </table>
 
   <div class="w-75 mx-auto text-end mt-3">
