@@ -1,5 +1,7 @@
 package com.minse0.memo.post.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.minse0.memo.post.domain.Post;
@@ -37,4 +39,9 @@ public class PostService {
 		return true;
 		
 	}
+	
+	public List<Post> getPostList() {
+	    return postRepository.findAllByOrderByIdDesc();
+	}
+
 }
