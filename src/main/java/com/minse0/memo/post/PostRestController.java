@@ -57,7 +57,7 @@ public class PostRestController {
 		return resultMap;
 	}
 	
-	@DeleteMapping("delete")
+	@DeleteMapping("/delete")
 	public Map<String, String> deletePost(
 			@RequestParam long id) {
 		
