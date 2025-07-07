@@ -16,13 +16,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder
+@Builder(toBuilder=true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="`post`")
 @Entity
 @Getter
-@Setter
+
 public class Post {
 	
 	@Id

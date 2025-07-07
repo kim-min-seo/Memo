@@ -60,5 +60,48 @@ public class PostService {
 			return null;
 		}
 	}
-
+	
+	public boolean updatePost(
+			long id
+			, String title
+			, String contents
+			) {
+		Optional <Post> optionalPost =  postRepository.findById(id);
+		if(optionalPost.isPresent()) {
+			
+			Post post = optionalPost.get();
+			
+			post = post.toBuilder()
+			.title(title)
+			.contents(contents)
+			.build();
+			
+			try {
+				postRepository.save(post);
+			} catch(PersistenceException e){
+				return false;
+			}
+			
+		} else {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean deletePost(long id) {
+		
+		Optional<Post> optionalPost = postRepository.findById(id);
+		
+		if(optionalPost.isPresent()) {
+			Post post = optionalPost.get();
+			
+			
+			postRepository.delete(post);
+			
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
 }
