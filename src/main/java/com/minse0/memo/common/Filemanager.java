@@ -63,4 +63,23 @@ public class Filemanager {
 	
 		
 	}
+	 public static boolean removeFile(String filePath) { // /images/2_89043958305/test.png
+		 
+		 if (filePath == null || filePath.isBlank()) {
+			    return false;
+			}
+		 String fullFilePath = FILE_UPLOAD_PATH + filePath.replace("/images", "");
+		 
+		Path path = Paths.get(fullFilePath);
+		
+		Path dirPath = path.getParent();
+		try {
+			Files.delete(path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	 }
 }

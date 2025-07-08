@@ -49,6 +49,7 @@ public class PostController {
 	    	
 	    	Post post = postService.getPost(id);
 	    	
+	    	
 	    	model.addAttribute("memo",post);
 	    	
 	    	return "post/detail";

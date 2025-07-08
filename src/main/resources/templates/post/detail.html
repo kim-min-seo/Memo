@@ -11,7 +11,7 @@
       		<img th:src="${memo.imagePath}">
       		
       		<div class="d-flex justify-content-between gap-2">
-      			<button type="button" class="btn btn-danger">삭제</button>
+      			<button type="button" class="btn btn-danger" id="deleteBtn">삭제</button>
       			
       			<div>
 	      			<a href="/post/list-view" class="btn btn-secondary">목록으로</a>
@@ -22,6 +22,26 @@
       </section>
       
       <script layout:fragment="script">
+      $("#deleteBtn").on("click", function(){
+    	 	let id = $("#memoContents").data("id"); 
+    	 	
+    	 	$.ajax({
+    	 		type:"delete"
+    	 		, url:"/post/delete"
+    	 		, data:{"id":id}
+    	 		, success:function(response){
+    	 			if(response.result == "success"){
+    	 				location.href = "/post/list-view";
+
+    	 			} else{
+    	 				alert("삭제 실패")
+    	 			}
+    	 		}
+    	 		, error:function(){
+    	 			alert("삭제 에러!")
+    	 		}
+    	 	});
+      });
       	$("#updateBtn").on("click", function(){
       		
       		let id = $("#memoContents").data("id");

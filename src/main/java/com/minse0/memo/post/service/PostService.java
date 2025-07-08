@@ -95,6 +95,7 @@ public class PostService {
 		if(optionalPost.isPresent()) {
 			Post post = optionalPost.get();
 			
+			Filemanager.removeFile(post.getImagePath());
 			
 			postRepository.delete(post);
 			
